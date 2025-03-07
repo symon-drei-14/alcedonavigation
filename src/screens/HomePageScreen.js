@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Button, FlatList, ActivityIndicator } from "react-native";
-import { loginstyle } from "../styles/Styles"; // Import your styles
+import { loginstyle } from "../styles/Styles"; 
 import api from "../api"; 
 
 function HomePageScreen({ route, navigation }) {
     const { token, username } = route.params;
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log("Username:", username); // Should print the correct username
-
+  console.log("Username:", username); 
   useEffect(() => {
     api
       .get("/users") 
