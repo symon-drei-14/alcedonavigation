@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, Button, Alert } from "react-native";
-import api from "../api"; // Import API instance
+import api from "../api"; 
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
 
       Alert.alert("Success", "Login Successful!", [{ text: "OK" }]);
 
-      // Pass user data to HomePageScreen
+      
       navigation.navigate("HomePageScreen", {  username });
 
     } catch (error) {
