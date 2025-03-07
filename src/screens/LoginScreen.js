@@ -14,9 +14,9 @@ const LoginScreen = ({ navigation }) => {
 
     try {
       const response = await api.post("/auth/login", { username, password });
-      console.log("API Response Data:", response.data);
+
       console.log("Request Body:\n", JSON.stringify({ username, password }, null, 2));
-      console.log("\nResponse:\n", JSON.stringify(response.data, null, 2));
+      console.log("\nResponse:\n", JSON.stringify(response.data.token));
 
       Alert.alert("Success", "Login Successful!", [{ text: "OK" }]);
 
