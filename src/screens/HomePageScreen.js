@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Button, FlatList, ActivityIndicator } from "react-native";
+import { loginstyle } from "../styles/Styles"; // Import your styles
 import api from "../api"; 
 
-function HomePageScreen({ navigation }) {
+function HomePageScreen({ route, navigation }) {
+    const { token, username } = route.params;
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log("Username:", username); // Should print the correct username
 
   useEffect(() => {
-    // Fetch data from Fake Store API
     api
       .get("/users") 
       .then((response) => {
@@ -17,30 +19,41 @@ function HomePageScreen({ navigation }) {
       .catch((error) => {
         console.error("Error fetching employees:", error);
         setLoading(false);
+        console.log("UserData received in HomePageScreen:", userData);
       });
   }, []);
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 20 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 10 }}>Homepage po</Text>
-      <Text>Hello, React Native!</Text>
+    <View style={loginstyle.container}>
+      <View style={loginstyle.innerContainer}>
+        <Text style={loginstyle.title}>Welcome, {username}!</Text>
+        <Text style={{ textAlign: "center", marginBottom: 15 }}>
+          This is the homepage!
+        </Text>
 
-      <Button title="Go to Register" onPress={() => navigation.navigate("RegisterScreen")} />
-      <Button title="Go to Admin Register" onPress={() => navigation.navigate("RegisterAdminScreen")} />
+        <View style={{ marginBottom: 15 }}>
+          <Button title="Go to Register" onPress={() => navigation.navigate("RegisterScreen")} />
+        </View>
+        <View style={{ marginBottom: 15 }}>
+          <Button title="Go to Admin Register" onPress={() => navigation.navigate("RegisterAdminScreen")} />
+        </View>
 
-      <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 20 }}>Employees List</Text>
+        <Text style={[loginstyle.title, { marginTop: 20 }]}>Employees List</Text>
 
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <FlatList
-          data={employees}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <Text>{item.name.firstname} {item.name.lastname}</Text>
-          )}
-        />
-      )}
+        {loading ? (
+          <ActivityIndicator size="large" color="#841584" />
+        ) : (
+          <FlatList
+            data={employees}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <Text style={{ textAlign: "center", fontSize: 16, padding: 5 }}>
+                {item.name.firstname} {item.name.lastname}
+              </Text>
+            )}
+          />
+        )}
+      </View>
     </View>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View, TextInput, Button, Alert } from "react-native";
 import api from "../api"; // Import API instance
 
-function LoginScreen({ navigation }) {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,18 +13,16 @@ function LoginScreen({ navigation }) {
     }
 
     try {
-      const response = await api.post("/auth/login", {
-        username,
-        password,
-      });
-
+      const response = await api.post("/auth/login", { username, password });
+      console.log("API Response Data:", response.data);
       console.log("Request Body:\n", JSON.stringify({ username, password }, null, 2));
       console.log("\nResponse:\n", JSON.stringify(response.data, null, 2));
 
       Alert.alert("Success", "Login Successful!", [{ text: "OK" }]);
-      
-      // Navigate to HomePageScreen
-      navigation.navigate("HomePageScreen");
+
+      // Pass user data to HomePageScreen
+      navigation.navigate("HomePageScreen", {  username });
+
     } catch (error) {
       console.error("Login error:", error);
       Alert.alert("Error", "Invalid username or password!", [{ text: "OK" }]);
