@@ -6,6 +6,9 @@ import api from "../api";
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isPressed, setIsPressed] = useState(false);
+
+
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -28,7 +31,8 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={loginstyle.container}>
+    <View style={[loginstyle.container, { backgroundColor: "#FFFAF3" }]}>
+        
       <View style={loginstyle.innerContainer}>
         <Text style={loginstyle.title}>Login</Text>
 
@@ -49,10 +53,20 @@ const LoginScreen = ({ navigation }) => {
           placeholder="Enter your password"
         />
 
-        <TouchableOpacity style={loginstyle.button} onPress={handleLogin}>
+        {/* <TouchableOpacity style={loginstyle.button} onPress={handleLogin}>
           <Text style={loginstyle.buttonText}>Login</Text>
-        </TouchableOpacity>
-
+        </TouchableOpacity> */}
+<TouchableOpacity
+  style={[
+    loginstyle.button,
+    { backgroundColor: isPressed ? "#6A0DAD" : "#841584" },
+  ]}
+  onPressIn={() => setIsPressed(true)}
+  onPressOut={() => setIsPressed(false)}
+  onPress={handleLogin}
+>
+  <Text style={loginstyle.buttonText}>Login</Text>
+</TouchableOpacity>
         <View style={{ marginTop: 20, alignItems: "center" }}>
           <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}> 
             <Text style={{ color: "#841584", fontWeight: "bold" }}>Register as User</Text>

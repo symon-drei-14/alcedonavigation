@@ -46,4 +46,8 @@ export const loginstyle = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+
+  
+
+  
 });

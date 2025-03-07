@@ -23,19 +23,14 @@ function HomePageScreen({ route, navigation }) {
   }, []);
 
   return (
-    <View style={loginstyle.container}>
+    <View style={[loginstyle.container, { backgroundColor: "#FFFAF3" }]}>
       <View style={loginstyle.innerContainer}>
         <Text style={loginstyle.title}>Welcome, {username}!</Text>
         <Text style={{ textAlign: "center", marginBottom: 15 }}>
           This is the homepage!
         </Text>
 
-        <View style={{ marginBottom: 15 }}>
-          <Button title="Go to Register" onPress={() => navigation.navigate("RegisterScreen")} />
-        </View>
-        <View style={{ marginBottom: 15 }}>
-          <Button title="Go to Admin Register" onPress={() => navigation.navigate("RegisterAdminScreen")} />
-        </View>
+       
 
         <Text style={[loginstyle.title, { marginTop: 20 }]}>Employees List</Text>
 
