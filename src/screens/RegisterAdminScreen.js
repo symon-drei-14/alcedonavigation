@@ -27,7 +27,7 @@ const [username, setUsername] = useState("");
   return (
     <View style={loginstyle.container}>
       <View style={loginstyle.innerContainer}>
-        <Text style={loginstyle.title}>Create your own account</Text>
+        <Text style={loginstyle.title}>Create your own admin account</Text>
 
         <Text>First name</Text>
         <TextInput
